@@ -37,6 +37,7 @@
   - @Nested : 중첩된 테스트 클래스를 정의하여 관련된 테스트를 그룹화
   - @BeforeEach, @Test, @DisplayName
 - **AssertJ**
+  - assertThat
 ### Repository 테스트
 - **Spring Boot Test**
   - @DataJpaTest : JPA 관련 컴포넌트(ex. 리포지토리)를 테스트하기 위해 사용, 이때 내장된 데이터베이스를 사용
