@@ -1,18 +1,18 @@
-### 테스트 코드 작성법 학습 프로젝트
+# 테스트 코드 작성법 학습 프로젝트
 앞으로의 코드 테스트를 위한 테스트 코드 작성 방법 학습
 
-### 개발 환경
+## 개발 환경
 - Java 17
 - Gradle 8.7
 - Spring Boot : 3.2.5
 - Database : H2-database
 - Tools : IntelliJ IDEA Community
 
-### 기능
+## 기능
 - `Hello` 생성, 조회, 수정
 
-### 1. 단위 테스트
-#### Controller 테스트
+## 1. 단위 테스트
+### Controller 테스트
 - **Spring Boot Test**
   - @WebMvcTest : Spring MVC 구성 요소에 대한 단위 테스트를 수행할 수 있게 해줌
 - **Spring Test**
@@ -27,7 +27,7 @@
   - @Test, @BeforeEach, @DisplayName, @Nested
 - **AssertJ**
   - assertThat
-#### Service 테스트
+### Service 테스트
 - **Mockito**
   - @ExtendWith(MockitoExtension.class) : Mockito와 JUnit 5를 통합하여 사용하는 애노테이션
   - @InjectMocks : Mockito를 사용하여 객체를 생성
@@ -37,7 +37,7 @@
   - @Nested : 중첩된 테스트 클래스를 정의하여 관련된 테스트를 그룹화
   - @BeforeEach, @Test, @DisplayName
 - **AssertJ**
-#### Repository 테스트
+### Repository 테스트
 - **Spring Boot Test**
   - @DataJpaTest : JPA 관련 컴포넌트(ex. 리포지토리)를 테스트하기 위해 사용, 이때 내장된 데이터베이스를 사용
   - @AutoConfigureTestDatabase : 테스트에 사용할 데이터베이스를 구성. 이때 임베디드 데이터베이스를 사용하지 않도록 설정
@@ -50,7 +50,7 @@
 - **AssertJ**
   - assertThat
 
-### 2. 통합 테스트
+## 2. 통합 테스트
 - **Spring Boot Test**
   - @SpringBootTest : Spring Boot 애플리케이션 컨텍스트를 로드하고 통합 테스트를 수행하게 해줌
   - @Transactional : 테스트가 끝난 후 롤백을 수행하여 테스트 간의 데이터를 격리할 수 있게 해줌
@@ -65,5 +65,5 @@
 - **AssertJ**
   - assertThat
 
-### 3. 예외 테스트
+## 3. 예외 테스트
 - mockMvc
