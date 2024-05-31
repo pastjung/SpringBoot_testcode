@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -18,8 +19,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @SpringBootTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)   // 어플리케이션 전체가 로드 -> 모든 빈과 구성이 테스트에 포함
+@AutoConfigureMockMvc   // MockMvc 객체를 의존 주입 받을 수 있게 해줌 -> 실제 주입은 @Autowired 로 수행
+@Transactional  // 테스트가 끝나면 롤백
 public class HelloIntegrationTest implements HelloTest {
     @Autowired
     private MockMvc mockMvc;
@@ -35,6 +37,7 @@ public class HelloIntegrationTest implements HelloTest {
     @Test
     @DisplayName("Hello 생성 통합 테스트")
     @Transactional
+    @DirtiesContext // 각각의 테스트를 독립적으로 수행
     void createHello() throws Exception{
         // given
         RequestDto requestDto = RequestDto.builder()
@@ -51,10 +54,14 @@ public class HelloIntegrationTest implements HelloTest {
 
         // then
         result.andExpect(status().isCreated());
+
+        assertThat(helloRepository.existsById(HELLO.getId())).isTrue();
     }
 
     @Nested
     @DisplayName("Hello 조회 통합 테스트")
+    @Transactional
+    @DirtiesContext // 각각의 테스트를 독립적으로 수행
     class getEntity{
         @BeforeEach
         void setup() {
@@ -63,7 +70,6 @@ public class HelloIntegrationTest implements HelloTest {
 
         @Test
         @DisplayName("Hello 조회 통합 테스트")
-        @Transactional
         void getHello() throws Exception{
             // given
             Long id = HELLO.getId();
@@ -81,6 +87,8 @@ public class HelloIntegrationTest implements HelloTest {
 
     @Nested
     @DisplayName("Hello 수정 통합 테스트")
+    @Transactional
+    @DirtiesContext // 각각의 테스트를 독립적으로 수행
     class setEntity{
         Hello savedHello;
 
@@ -91,7 +99,6 @@ public class HelloIntegrationTest implements HelloTest {
 
         @Test
         @DisplayName("Hello 수정 통합 테스트")
-        @Transactional
         void setHello() throws Exception{
             // given
             Long id = HELLO.getId();
