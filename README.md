@@ -31,7 +31,7 @@
 ## 2. 통합 테스트
 - Spring Boot Test
 - Spring Test
-- - JUnit 5
+- JUnit 5
 - Jackson
 - AssertJ
 
