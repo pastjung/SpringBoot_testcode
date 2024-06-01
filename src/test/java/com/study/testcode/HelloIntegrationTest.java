@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)   // 어플리케이션 전체가 로드 -> 모든 빈과 구성이 테스트에 포함
-@AutoConfigureMockMvc   // MockMvc 객체를 의존 주입 받을 수 있게 해줌 -> 실제 주입은 @Autowired 로 수행
+@AutoConfigureMockMvc   // MockMvc 객체를 자동으로 구성해 의존 주입 쉽게 받을 수 있게 해줌 -> 실제 주입은 @Autowired 로 수행
 @Transactional  // 테스트가 끝나면 롤백
 public class HelloIntegrationTest implements HelloTest {
     @Autowired
